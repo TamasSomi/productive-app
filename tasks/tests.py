@@ -26,3 +26,26 @@ class TaskListViewTests(APITestCase):
     def test_user_not_logged_in_cant_create_task(self):
         response = self.client.post('/tasks/', {'title': 'a title'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class TestDetailViewTests(APITestCase):
+    def setUp(self):
+        tomi = User.objects.create_user(username='tomi', password='pass')
+        george = User.objects.create_user(username='george', password='pass')
+        Task.objects.create(
+            owner=tomi, title='a title', content='tomis content'
+        )
+        Task.objects.create(
+            owner=george, title='another title', content='georges content'
+        )
+
+    def test_can_retrieve_task_using_valid_id(self):
+        response = self.client.get('/tasks/1/')
+        self.assertEqual(response.data['title'], 'a title')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_cant_retrieve_task_using_invalid_id(self):
+        response = self.client.get('/tasks/966')
+        self.assertEqual(
+            response.status_code, status.HTTP_301_MOVED_PERMANENTLY
+        )
