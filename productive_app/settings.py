@@ -67,7 +67,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-tamassomi-productive-app-6n2eriejng.us2.codeanyapp.com',
-    'localhost', 'productive-app.herokuapp.com',
+    'productive-app-060b4c85d875.herokuapp.com',
     os.environ.get('ALLOWED_HOST'),
     'localhost',
 ]
