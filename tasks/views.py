@@ -40,7 +40,8 @@ class TaskDetail(APIView):
 
     def get_object(self, pk):
         try:
-            task = Task.objects.get(pk=pk)
+            # task = Task.objects.get(pk=pk)
+            task = self.get_queryset().get(pk=pk)
             self.check_object_permissions(self.request, task)
             return task
         except Task.DoesNotExist:
@@ -71,3 +72,8 @@ class TaskDetail(APIView):
         return Response(
             status=status.HTTP_204_NO_CONTENT
         )
+
+    # only the owner can see the task
+    def get_queryset(self):
+        user = self.request.user
+        return Task.objects.filter(owner=user)
