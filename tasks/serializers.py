@@ -34,5 +34,5 @@ class TaskSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'title', 'content', 'image', 'deadline',
-            'image_filter, notes_count'
+            'image_filter', 'notes_count'
         ]
