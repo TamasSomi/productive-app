@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from tasks.models import Task
+from django.core.exceptions import ValidationError
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -9,10 +10,18 @@ class TaskSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     notes_count = serializers.ReadOnlyField()
 
+    def validate_deadline(self, value):
+        """
+        Validate that the deadline is not in the past.
+        """
+        if value and value < timezone.now():
+            raise ValidationError("Deadline cannot be in the past.")
+        return value
+
     def validate_image(self, value):
-        if value.size > 1024 * 1024 * 2:
+        if value.size > 1024 * 1024 * 20:
             raise serializers.ValidationError(
-                'Image size larger than 2MB'
+                'Image size larger than 20MB'
             )
         if value.image.width > 4096:
             raise serializers.ValidationError(
