@@ -5,8 +5,10 @@ from .models import Note
 
 class NoteSerializer(serializers.ModelSerializer):
     """
-    Serializer for the Note model
-    Adds three extra fields when returning a list of Note instances
+    Serializer for the Note model.
+
+    This serializer extends the basic functionality of the Note model
+    by adding extra fields for improved representation in API responses.
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()

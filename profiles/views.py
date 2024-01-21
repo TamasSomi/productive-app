@@ -8,6 +8,9 @@ from productive_app.permissions import IsOwnerOrReadOnly
 
 
 class ProfileList(APIView):
+    """
+    API view for listing all profiles.
+    """
     def get(self, request):
         profiles = Profile.objects.all()
         serializer = ProfileSerializer(
@@ -17,6 +20,9 @@ class ProfileList(APIView):
 
 
 class ProfileDetail(APIView):
+    """
+    API view for retrieving, updating, and deleting a specific profile.
+    """
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
 

@@ -6,6 +6,9 @@ from rest_framework.exceptions import PermissionDenied
 
 
 class NoteList(generics.ListCreateAPIView):
+    """
+    API view for listing and creating Note instances.
+    """
     serializer_class = NoteSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Note.objects.all()

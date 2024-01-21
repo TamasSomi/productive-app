@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Task(models.Model):
     """
-
+    Model representing a task.
     """
 
     image_filter_choices = [

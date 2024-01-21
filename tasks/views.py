@@ -8,6 +8,9 @@ from productive_app.permissions import IsOwnerOrReadOnly
 
 
 class TaskList(APIView):
+    """
+    API view for listing and creating Task instances.
+    """
     serializer_class = TaskSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
@@ -35,6 +38,9 @@ class TaskList(APIView):
 
 
 class TaskDetail(APIView):
+    """
+    API view for retrieving, updating, and deleting a specific task.
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = TaskSerializer
 

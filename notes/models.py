@@ -5,7 +5,7 @@ from tasks.models import Task
 
 class Note(models.Model):
     """
-    Note model, related to User and Task
+    Represents a Note associated with a specific User and Task
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
